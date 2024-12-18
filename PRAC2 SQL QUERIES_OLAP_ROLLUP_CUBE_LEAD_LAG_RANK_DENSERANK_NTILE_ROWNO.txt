@@ -1,0 +1,64 @@
+
+create table employees (
+empid varchar(10), empno varchar(20), depno varchar(10), salary number(7), gender varchar(20)
+);
+
+
+
+insert into employee values('1000','Ajay Singh','PD',15000,'Male');
+insert into employee values('1000','Ajay Singh','PD',15000,'Male');
+
+
+insert into employees values('1000','Ajay Singh','PD',15000,'Male');
+insert into employees values('1001','Bharti Shetty','QC',25000,'Female');
+insert into employees values('1002','Sheetal Roy','PD',35000,'Female');
+insert into employees values('1003','Meena Pawar','Support',30000,'Male');
+insert into employees values('1004','Rajlaxmi Pal','Support',4000,'Female');
+insert into employees values('1005','Vaibhav Vaidya','QC',5000,'Male');
+insert into employees values('1006','Nancy','QC',5000,'Female');
+
+select depno,SUM(salary) from employees group by depno;
+
+select depno,gender,SUM(salary) from employees group by rollup(depno,gender);
+
+ROLLUP------------------------------
+
+select COALESCE(depno,'Total'),gender,SUM(salary) from employees group by rollup(depno,gender);
+
+
+CUBE -------------------------------------
+select COALESCE(depno,'Total') "Department",gender,SUM(salary) from employees group by cube(depno,g
+ender);
+
+fIRST VALUE -----------------------------------------
+select empno,depno, FIRST_VALUE(SALARY) OVER(partition by depno ORDER BY salary desc)"first_val" fr
+om employees;
+
+
+LASTvALUE ------------------------------------------
+select empno,depno, LAST_VALUE(SALARY) OVER(partition by depno ORDER BY salary ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)"last_val" from employees;
+
+
+lEAD---------------------------------
+
+select empid,depno,salary,LEAD(salary,1)OVER(ORDER BY salary)AS"NextSalary" from employee;
+
+lag==========================================
+
+select empid,depno,salary,LAG(salary,1)OVER(ORDER BY salary)AS"PreSalary" from employee where depno='QC';
+
+
+RANK--------------------------------------------
+SELECT EMPID, DEPNO, SALARY, RANK() OVER(ORDER BY SALARY)"RANK" FROM EMPLOYEES;
+
+
+DENSE_RANK ----------------------------------------
+SELECT EMPID, DEPNO, SALARY, RANK() OVER(ORDER BY SALARY DESC)"RANK" FROM EMPLOYEES;
+
+ROW_NUMBER------------------------------------------
+SELECT EMPID, DEPNO, SALARY, ROW_NUMBER() OVER(ORDER BY SALARY DESC)"RANK" FROM EMPLOYEES;
+
+
+NTILE---------------------------------------------------
+SELECT EMPID, DEPNO, SALARY, NTILE(3) OVER(ORDER BY SALARY DESC)"RANK" FROM EMPLOYEES;
+

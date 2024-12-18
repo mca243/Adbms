@@ -1,0 +1,39 @@
+CREATE TABLE students (
+    fname VARCHAR2(50),
+    lname VARCHAR2(50),
+    percentage NUMBER(5,2),
+    age NUMBER(3)
+);
+
+INSERT INTO students (fname, lname, percentage, age) VALUES ('Aarav', 'Verma', 88.5, 22);
+INSERT INTO students (fname, lname, percentage, age) VALUES ('Meena', 'Rao', 79.0, 23);
+INSERT INTO students (fname, lname, percentage, age) VALUES ('Rahul', 'Sharma', 67.0, 21);
+INSERT INTO students (fname, lname, percentage, age) VALUES ('Priya', 'Gupta', 90.0, 22);
+INSERT INTO students (fname, lname, percentage, age) VALUES ('Siddharth', 'Mehta', 85.0, 24);
+INSERT INTO students (fname, lname, percentage, age) VALUES ('Anjali', 'Kapoor', 72.5, 20);
+INSERT INTO students (fname, lname, percentage, age) VALUES ('Karan', 'Malhotra', 65.0, 22);
+INSERT INTO students (fname, lname, percentage, age) VALUES ('Neha', 'Patel', 58.0, 21);
+INSERT INTO students (fname, lname, percentage, age) VALUES ('Rohit', 'Desai', 76.0, 23);
+INSERT INTO students (fname, lname, percentage, age) VALUES ('Sneha', 'Chopra', 81.0, 22);
+
+
+CREATE TABLE accounts (
+    accno NUMBER(5,1),
+    custname VARCHAR2(50),
+    branch VARCHAR2(50),
+    acctbal NUMBER(10,2)
+);
+
+-- Inserting values from the image
+INSERT INTO accounts (accno, custname, branch, acctbal) VALUES (6.0, 'Mansi', 'Thane', 80.0);
+INSERT INTO accounts (accno, custname, branch, acctbal) VALUES (4.0, 'Chutki', 'Bhuvaneshwar', 2000.0);
+INSERT INTO accounts (accno, custname, branch, acctbal) VALUES (5.0, 'Nancy', 'Bhuvaneshwar', 2000.0);
+INSERT INTO accounts (accno, custname, branch, acctbal) VALUES (1.0, 'Sugar', 'Bhuvaneshwar', 5000.0);
+INSERT INTO accounts (accno, custname, branch, acctbal) VALUES (2.0, 'Arman', 'Fun', 9998.0);
+INSERT INTO accounts (accno, custname, branch, acctbal) VALUES (3.0, 'Sanskar', 'Airport', 7000.0);
+
+-- Additional unique values
+INSERT INTO accounts (accno, custname, branch, acctbal) VALUES (7.0, 'Kavya', 'Delhi', 12000.0);
+INSERT INTO accounts (accno, custname, branch, acctbal) VALUES (8.0, 'Amit', 'Mumbai', 4500.0);
+INSERT INTO accounts (accno, custname, branch, acctbal) VALUES (9.0, 'Ravi', 'Pune', 8000.0);
+INSERT INTO accounts (accno, custname, branch, acctbal) VALUES (10.0, 'Shivani', 'Chennai', 500.0);

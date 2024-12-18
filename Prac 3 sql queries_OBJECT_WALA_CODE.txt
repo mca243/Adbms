@@ -1,0 +1,29 @@
+
+
+
+create or replace type full_name as 
+object(fname varchar(20), mname varchar(20), lname varchar(20));
+
+
+create or replace type full_address as object(street varchar(20),city varchar(20),pincode number);
+
+
+create table customer(c_id number(5),c_name full_name,c_add full_address,c_phone number(10));
+
+
+insert into customer values(2,full_name('Akshay','A','Anpat'),full_address('Marine Lines','Mumbai',400028),9820173925);
+insert into customer values(1,full_name('Tushar','D','Kinni'),full_address('Powai','Mumbai',400076),9892750112);
+insert into customer values(3,full_name('Sayali','S','Sanjay'),full_address('Malad','Mumbai',40076),9892750012);
+insert into customer values(4,full_name('Sneha','P','Tejas'),full_address('Mira Road','Mumbai',400077),9768760962);
+insert into customer values(5,full_name('Hiral','H','Ritesh'),full_address('Dahisar','Mumbai',400087),9892750119);
+
+
+select c.c_name.fname from customer c;
+select c.c_name.mname from customer c;
+select c.c_name.lname from customer c;
+select c.c_name.fname,c.c_name.mname,c.c_name.lname from customer c;
+
+
+select c.c_add.street,c.c_add.city,c.c_add.pincode from customer c;
+
+select c.c_name.fname,c.c_name.mname,c.c_name.lname,c.c_add.street,c.c_add.city,c. c_add.pincode,c.c_phone from customer c;

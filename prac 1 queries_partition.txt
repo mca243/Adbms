@@ -1,0 +1,116 @@
+List Partitioning:-
+Create a table and make partition in it:-
+
+>create table product(prdno varchar(20),prdname varchar(20),rate number, Qty_available number)
+partition by list(prdno) (
+partition pd1 values('p001','p002','p003','p004'), partition pd2 values('t001','t002','t003','t004'), partition pd3 values('q001','q002','q003','q004'), partition pd4 values('v001','v002','v003','v004')
+);
+
+
+to check the partitions made:-
+COLUMN partition_name FORMAT A15;
+COLUMN high_value FORMAT A30;
+COLUMN tablespace_name FORMAT A20;
+
+SELECT partition_name, high_value, tablespace_name
+FROM user_tab_partitions
+WHERE table_name = 'PRODUCT';
+
+
+
+
+To insert values in the partitions made:-
+>insert into product values('p001','paracetamol',10,90);
+
+>insert into product values('t001','honitos',21,89);
+
+
+
+To check the value inserted in a particular partition:-
+>select * from product partition(pd1);
+
+To check the values of all the partitions inserted:-
+>select*from product;
+
+
+
+
+
+
+
+To rename a particular partition:-
+>alter table product rename partition pd1 to pd9;
+
+
+
+
+
+check:-
+>select*from user_tab_partitions where table_name='PRODUCT';
+
+
+To modify the values of a particular partition:-
+>alter table product modify partition pd4 add values('l0k9');
+
+check:-
+>select * from user_tab_partitions where table_name='PRODUCT';
+
+
+Create partition by range:-
+>create table accounts(accno number,custname varchar(23),branch varchar(23),acctbal number)
+partition by range(acctbal) (
+partition p1 values less than(2000), partition p2 values less than(5000), partition p3 values less than(9999)
+);
+
+
+
+Insert the values :-
+>insert into accounts values(1,'Sugar','Bhuvaneshwar',5000);
+>insert into accounts values(2,'Arman','Fun',9998);
+>insert into accounts values(3,'Sanskar','Airport',7000);
+>insert into accounts values(4,'Chutki','Bhuvaneshwar',2000);
+>insert into accounts values(5,'Nancy','Bhuvaneshwar',2000);
+>insert into accounts values(6,'Mansi','Thane',80);
+
+
+
+
+
+
+To check the value inserted in a particular partition:-
+>select*from accounts partition(p1);
+>select*from accounts partition(p2);
+>select*from accounts partition (p3);
+0
+
+
+Hash partition:
+CREATE TABLE transactions (
+    trans_id NUMBER,          -- Transaction ID
+    cust_id NUMBER,           -- Customer ID
+    trans_date DATE,          -- Transaction Date
+    trans_amount NUMBER       -- Transaction Amount
+)
+PARTITION BY HASH (cust_id) 
+PARTITIONS 4;  -- Divide the table into 4 hash partitions
+
+
+Insert data
+
+INSERT INTO transactions VALUES (101, 1, TO_DATE('2024-09-10', 'YYYY-MM-DD'), 1500);
+INSERT INTO transactions VALUES (102, 2, TO_DATE('2024-09-11', 'YYYY-MM-DD'), 3500);
+INSERT INTO transactions VALUES (103, 3, TO_DATE('2024-09-12', 'YYYY-MM-DD'), 2500);
+INSERT INTO transactions VALUES (104, 4, TO_DATE('2024-09-13', 'YYYY-MM-DD'), 4800);
+INSERT INTO transactions VALUES (105, 5, TO_DATE('2024-09-14', 'YYYY-MM-DD'), 1900);
+INSERT INTO transactions VALUES (106, 6, TO_DATE('2024-09-15', 'YYYY-MM-DD'), 500);
+INSERT INTO transactions VALUES (107, 7, TO_DATE('2024-09-16', 'YYYY-MM-DD'), 5500);
+INSERT INTO transactions VALUES (108, 8, TO_DATE('2024-09-17', 'YYYY-MM-DD'), 3000);
+
+
+
+
+View Data from Specific Partitions:
+
+SELECT partition_name, num_rows
+FROM user_tab_partitions
+WHERE table_name = 'TRANSACTIONS';
